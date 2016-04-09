@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="sort-app">
+<head>
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="numberTileDirective.js" defer></script>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div class="app-wrapper container" ng-controller="MainController as mainCtrl">
+        <h2>Podaj liczby do sortowania oddzielając przecinkiem</h2>
+        <input class="number-input" ng-model="numberToAdd" ng-pattern="/^-{0,1}[0-9]+\.{0,1}[0-9]*,$/" ng-change="addNewNumber(numberToAdd)" ng-required>
+        <button ng-click="startSorting()" class="btn btn-success start-sort-button">Sortuj!</button>
+        <button ng-click="numbersToSort = []" class="btn btn-info start-sort-button">Wyczyść tablicę</button>
+        <button ng-click="sortDirection = sortDirection == 'Rosnąco' ? 'Malejąco' : 'Rosnąco'" class="btn btn-info start-sort-button">{{sortDirection}}</button>
+        <div class="numbers-container row">
+            <number-tile ng-repeat="number in numbersToSort track by $index" tile-id="$index" number="number"></number-tile>
+        </div>
+    </div>
+</body>
+</html>
